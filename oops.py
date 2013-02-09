@@ -27,8 +27,8 @@ class oops(object):
             print (node.cond)
             self.counter += 1
         
-        def report(self):
-                return "no_while = " + str(self.counter)        
+        def count(self):
+            return self.counter        
 
     # DoWhile Loop Counter as recommended by pycparser.
     class DoWhileVisitor(c_ast.NodeVisitor):
@@ -39,8 +39,8 @@ class oops(object):
             print (node.cond)
             self.counter += 1
         
-        def report(self):
-            return "no_do_while = " + str(self.counter) 
+        def count(self):
+            return self.counter
         
     # For Loop Counter as recommended by pycparser.
     class ForVisitor(c_ast.NodeVisitor):
@@ -51,9 +51,8 @@ class oops(object):
             print (node.cond)
             self.counter += 1
         
-        def report(self):
-            return "no_for = " + str(self.counter)   
-
+        def count(self):
+            return self.counter
         
     def __init__(self):
         files   = self.walk(self.BIND_DIR)
@@ -73,7 +72,11 @@ class oops(object):
         output = []
         while_visitor = self.WhileVisitor()
         dowhi_visitor = self.DoWhileVisitor()
-        forlo_visitor = self.ForVisitor()   
+        forlo_visitor = self.ForVisitor()  
+        
+        totalwhiles  = 0
+        totaldwhiles = 0
+        totalfors    = 0 
 
         
         for file in files:
@@ -84,15 +87,21 @@ class oops(object):
             dowhi_visitor.visit(ast)
             forlo_visitor.visit(ast)
             
-            ast.show
+            ast.show()
             
-            output.append(while_visitor.report())
-            output.append(dowhi_visitor.report())
-            output.append(forlo_visitor.report())
-        
-        return ','.join(output)
-        
+            totalwhiles  = totalwhiles  + while_visitor.count()
+            totaldwhiles = totaldwhiles + dowhi_visitor.count()
+            totalfors    = totalfors    + forlo_visitor.count();
 
+            
+            
+        no_files = "{total_files:" + str(len(files)) + "},"
+        output.append("{whiles:" + str(totalwhiles) + "}")
+        output.append("{do_whiles:" + str(totaldwhiles) + "}")
+        output.append("{fors:" + str(totalfors) + "}")        
+         
+        return "{" + "oops: [" + no_files + ','.join(output) + "] }"
+    
 
 if __name__ == '__main__':
     t = oops()
