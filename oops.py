@@ -10,10 +10,13 @@ Copyright (c) 2013 Huascar A. Sanchez. All rights reserved.
 import sys, os
 import subprocess
 
+sys.path.insert(0, '..')
+
 from pycparser import c_parser, c_ast, parse_file # A Parser for the C language: https://bitbucket.org/eliben/pycparser
 
 class oops(object):
     BIND_DIR = os.path.dirname(os.path.abspath(__file__))
+    
     
     # Portable cpp path for Windows and Linux/Unix
     CPPPATH = '../utils/cpp.exe' if sys.platform == 'win32' else 'cpp'
@@ -58,6 +61,7 @@ class oops(object):
         files   = self.walk(self.BIND_DIR)
         output  = self.peek(files)
         print(output)
+          
         
     def walk(self, path):
         results = []
@@ -78,21 +82,26 @@ class oops(object):
         totalwhiles  = 0
         totaldwhiles = 0
         totalfors    = 0 
-
+    
         
         for file in files:
-            ast = parse_file(file, use_cpp=True,
+            try:
+                ast = parse_file(file, use_cpp=True,
                         cpp_path=self.CPPPATH)
             
-            while_visitor.visit(ast)
-            dowhi_visitor.visit(ast)
-            forlo_visitor.visit(ast)
+                while_visitor.visit(ast)
+                dowhi_visitor.visit(ast)
+                forlo_visitor.visit(ast)
             
-            ast.show()
+                ast.show()
             
-            totalwhiles  = totalwhiles  + while_visitor.count()
-            totaldwhiles = totaldwhiles + dowhi_visitor.count()
-            totalfors    = totalfors    + forlo_visitor.count();
+                totalwhiles  = totalwhiles  + while_visitor.count()
+                totaldwhiles = totaldwhiles + dowhi_visitor.count()
+                totalfors    = totalfors    + forlo_visitor.count();        
+                        
+            except:
+                print("Unable to parse " + file)
+            
 
             
             
