@@ -12,6 +12,8 @@ import subprocess
 
 sys.path.insert(0, '..')
 
+import json
+
 from pycparser import c_parser, c_ast, parse_file # A Parser for the C language: https://bitbucket.org/eliben/pycparser
 
 class oops(object):
@@ -20,6 +22,30 @@ class oops(object):
     
     # Portable cpp path for Windows and Linux/Unix
     CPPPATH = '../utils/cpp.exe' if sys.platform == 'win32' else 'cpp'
+    
+    class Result(object):
+        def __init__(self, filename):
+            self.filename   = filename
+            self.whiles     = 0;
+            self.do_whiles  = 0;
+            self.fors       = 0;
+        
+        def capture(self, w, d, f):
+            self.whiles     = w
+            self.do_whiles  = d 
+            self.fors       = f
+        
+        def filename(self):
+            return self.filename
+        
+        def whiles(self):
+            return self.whiles
+        
+        def do_whiles(self):
+            return self.do_whiles
+        
+        def fors(self):
+            return self.fors  
 
     # While Loop Counter as recommended by pycparser.
     class WhileVisitor(c_ast.NodeVisitor):
@@ -86,31 +112,45 @@ class oops(object):
         
         for file in files:
             try:
-                ast = parse_file(file, use_cpp=True,
-                        cpp_path=self.CPPPATH)
+                
+                ast     = parse_file(file, use_cpp=True,
+                            cpp_path=self.CPPPATH)
             
                 while_visitor.visit(ast)
                 dowhi_visitor.visit(ast)
                 forlo_visitor.visit(ast)
             
                 ast.show()
-            
+                            
                 totalwhiles  = totalwhiles  + while_visitor.count()
                 totaldwhiles = totaldwhiles + dowhi_visitor.count()
-                totalfors    = totalfors    + forlo_visitor.count();        
+                totalfors    = totalfors    + forlo_visitor.count()
+                
+                output.append(
+                    dict(
+                        filename = os.path.basename(file), 
+                        whiles   = while_visitor.count(),
+                        do_whiles= dowhi_visitor.count(),
+                        fors     = forlo_visitor.count() 
+                    )
+                )        
                         
-            except:
-                print("Unable to parse " + file)
+            except Exception as e:
+                print "Unexpected parsing error ({0}): {1}".format(file,str(e)) 
             
 
-            
-            
-        no_files = "{total_files:" + str(len(files)) + "},"
-        output.append("{whiles:" + str(totalwhiles) + "}")
-        output.append("{do_whiles:" + str(totaldwhiles) + "}")
-        output.append("{fors:" + str(totalfors) + "}")        
+        
+        json_data = { 
+                "files" : [ r for r in output ], 
+                "totals" : dict(
+                        totalfiles=len(files), 
+                        totalwhiles=totalwhiles, 
+                        totaldowhiles=totaldwhiles, 
+                        totalfors=totalfors)
+        }
+                       
          
-        return "{" + "oops: [" + no_files + ','.join(output) + "] }"
+        return json.dumps(json_data, sort_keys=True)
     
 
 if __name__ == '__main__':
