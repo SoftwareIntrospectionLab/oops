@@ -16,50 +16,51 @@ import json
 
 from pycparser import c_parser, c_ast, parse_file # A Parser for the C language: https://bitbucket.org/eliben/pycparser
 
-class oops(object):
+class Visitor(c_ast.NodeVisitor):
+    def __init__(self):
+        self.counter = 0
+        
+    def inc(self, val = 1):
+        self.counter += val
+    
+    def count(self):
+        return self.counter
+
+class Oops(object):
     BIND_DIR = os.path.dirname(os.path.abspath(__file__))
     
     
     # Portable cpp path for Windows and Linux/Unix
     CPPPATH = '../utils/cpp.exe' if sys.platform == 'win32' else 'cpp'
-    
 
     # While Loop Counter as recommended by pycparser.
-    class WhileVisitor(c_ast.NodeVisitor):
+    class WhileVisitor(Visitor):
         def __init__(self):
-            self.counter    = 0
+            Visitor.__init__(self)
     
         def visit_While(self, node):
             print (node.cond)
-            self.counter += 1
-        
-        def count(self):
-            return self.counter        
+            Visitor.inc(self)      
 
     # DoWhile Loop Counter as recommended by pycparser.
-    class DoWhileVisitor(c_ast.NodeVisitor):
+    class DoWhileVisitor(Visitor):
         def __init__(self):
-            self.counter    = 0
+            Visitor.__init__(self)
     
         def visit_DoWhile(self, node):
             print (node.cond)
-            self.counter += 1
-        
-        def count(self):
-            return self.counter
+            Visitor.inc(self)
         
     # For Loop Counter as recommended by pycparser.
-    class ForVisitor(c_ast.NodeVisitor):
+    class ForVisitor(Visitor):
         def __init__(self):
-            self.counter    = 0
+            Visitor.__init__(self)
     
         def visit_For(self, node):
             print (node.cond)
-            self.counter += 1
+            Visitor.inc(self)
         
-        def count(self):
-            return self.counter
-        
+    
     def __init__(self):
         files   = self.walk(self.BIND_DIR)
         output  = self.peek(files)
@@ -130,4 +131,4 @@ class oops(object):
     
 
 if __name__ == '__main__':
-    t = oops()
+    t = Oops()
