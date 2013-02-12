@@ -128,10 +128,10 @@ class oops(object):
                 
                 output.append(
                     dict(
-                        filename = os.path.basename(file), 
-                        whiles   = while_visitor.count(),
-                        do_whiles= dowhi_visitor.count(),
-                        fors     = forlo_visitor.count() 
+                        filename    = os.path.basename(file), 
+                        numwhile    = while_visitor.count(),
+                        numdowhile  = dowhi_visitor.count(),
+                        numfor      = forlo_visitor.count() 
                     )
                 )        
                         
@@ -139,18 +139,17 @@ class oops(object):
                 print "Unexpected parsing error ({0}): {1}".format(file,str(e)) 
             
 
-        
-        json_data = { 
-                "files" : [ r for r in output ], 
-                "totals" : dict(
-                        totalfiles=len(files), 
-                        totalwhiles=totalwhiles, 
-                        totaldowhiles=totaldwhiles, 
-                        totalfors=totalfors)
-        }
+        json_data = dict(files=[ r for r in output ], 
+                         totals=dict(
+                                totfiles   =len(files), 
+                                totwhile   =totalwhiles, 
+                                totdowhile =totaldwhiles, 
+                                totfor     =totalfors
+                        )
+                    )
                        
          
-        return json.dumps(json_data, sort_keys=True)
+        return json.dumps(json_data, indent=4, separators=(',', ': '))
     
 
 if __name__ == '__main__':
