@@ -23,29 +23,6 @@ class oops(object):
     # Portable cpp path for Windows and Linux/Unix
     CPPPATH = '../utils/cpp.exe' if sys.platform == 'win32' else 'cpp'
     
-    class Result(object):
-        def __init__(self, filename):
-            self.filename   = filename
-            self.whiles     = 0;
-            self.do_whiles  = 0;
-            self.fors       = 0;
-        
-        def capture(self, w, d, f):
-            self.whiles     = w
-            self.do_whiles  = d 
-            self.fors       = f
-        
-        def filename(self):
-            return self.filename
-        
-        def whiles(self):
-            return self.whiles
-        
-        def do_whiles(self):
-            return self.do_whiles
-        
-        def fors(self):
-            return self.fors  
 
     # While Loop Counter as recommended by pycparser.
     class WhileVisitor(c_ast.NodeVisitor):
