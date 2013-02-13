@@ -12,52 +12,56 @@ import subprocess
 
 sys.path.insert(0, '..')
 
+import json
+
 from pycparser import c_parser, c_ast, parse_file # A Parser for the C language: https://bitbucket.org/eliben/pycparser
 from pycparser.plyparser import ParseError
 
-class oops(object):
-    # BIND_DIR = os.path.dirname(os.path.abspath(__file__))
-    BIND_DIR = '/home/linzhp/data/bind-9.9.1-P2/lib'
+class Visitor(c_ast.NodeVisitor):
+    def __init__(self):
+        self.counter = 0
+        
+    def inc(self, val = 1):
+        self.counter += val
+    
+    def count(self):
+        return self.counter
+
+class Oops(object):
+    BIND_DIR = os.path.dirname(os.path.abspath(__file__))
+    
     
     # Portable cpp path for Windows and Linux/Unix
     CPPPATH = '../utils/cpp.exe' if sys.platform == 'win32' else 'cpp'
 
     # While Loop Counter as recommended by pycparser.
-    class WhileVisitor(c_ast.NodeVisitor):
+    class WhileVisitor(Visitor):
         def __init__(self):
-            self.counter    = 0
+            Visitor.__init__(self)
     
         def visit_While(self, node):
             print (node.cond)
-            self.counter += 1
-        
-        def count(self):
-            return self.counter        
+            Visitor.inc(self)      
 
     # DoWhile Loop Counter as recommended by pycparser.
-    class DoWhileVisitor(c_ast.NodeVisitor):
+    class DoWhileVisitor(Visitor):
         def __init__(self):
-            self.counter    = 0
+            Visitor.__init__(self)
     
         def visit_DoWhile(self, node):
             print (node.cond)
-            self.counter += 1
-        
-        def count(self):
-            return self.counter
+            Visitor.inc(self)
         
     # For Loop Counter as recommended by pycparser.
-    class ForVisitor(c_ast.NodeVisitor):
+    class ForVisitor(Visitor):
         def __init__(self):
-            self.counter    = 0
+            Visitor.__init__(self)
     
         def visit_For(self, node):
             print (node.cond)
-            self.counter += 1
+            Visitor.inc(self)
         
-        def count(self):
-            return self.counter
-        
+    
     def __init__(self):
         files   = self.walk(self.BIND_DIR)
         output  = self.peek(files)
@@ -105,21 +109,35 @@ class oops(object):
             
                 totalwhiles  = totalwhiles  + while_visitor.count()
                 totaldwhiles = totaldwhiles + dowhi_visitor.count()
-                totalfors    = totalfors    + forlo_visitor.count();        
+                totalfors    = totalfors    + forlo_visitor.count()
+                
+                output.append(
+                    dict(
+                        filename    = os.path.basename(file), 
+                        numwhile    = while_visitor.count(),
+                        numdowhile  = dowhi_visitor.count(),
+                        numfor      = forlo_visitor.count() 
+                    )
+                )        
                         
             except ParseError as e:
                 print("Unable to parse " + file)
                 print(e)
 
             
-            
-        no_files = "{total_files:" + str(len(files)) + "},"
-        output.append("{whiles:" + str(totalwhiles) + "}")
-        output.append("{do_whiles:" + str(totaldwhiles) + "}")
-        output.append("{fors:" + str(totalfors) + "}")        
+
+        json_data = dict(files=[ r for r in output ], 
+                         totals=dict(
+                                totfiles   =len(files), 
+                                totwhile   =totalwhiles, 
+                                totdowhile =totaldwhiles, 
+                                totfor     =totalfors
+                        )
+                    )
+                       
          
-        return "{" + "oops: [" + no_files + ','.join(output) + "] }"
+        return json.dumps(json_data, indent=4, separators=(',', ': '))
     
 
 if __name__ == '__main__':
-    t = oops()
+    t = Oops()
