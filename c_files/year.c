@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
-
-/* C99 bools */
-_Bool just_a_flag = false;
-bool another_flag = true;
 
 void convert(int thousands, int hundreds, int tens, int ones)
 {
@@ -28,8 +23,6 @@ char *af_ten[] = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
     printf(" %s %s", for_ten[tens], num[ones]);
   else
     printf(" %s", af_ten[ones]);
-  
-  va_list jajaja;
 }
 
 

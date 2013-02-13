@@ -15,6 +15,7 @@ sys.path.insert(0, '..')
 import json
 
 from pycparser import c_parser, c_ast, parse_file # A Parser for the C language: https://bitbucket.org/eliben/pycparser
+from pycparser.plyparser import ParseError
 
 class Visitor(c_ast.NodeVisitor):
     def __init__(self):
@@ -61,8 +62,9 @@ class Oops(object):
             Visitor.inc(self)
         
     
-    def __init__(self):
-        files   = self.walk(self.BIND_DIR)
+    def __init__(self, input_dir):
+        self.input_dir = input_dir
+        files   = self.walk(input_dir)
         output  = self.peek(files)
         print(output)
           
@@ -90,16 +92,28 @@ class Oops(object):
         
         for file in files:
             try:
-                
-                ast     = parse_file(file, use_cpp=True,
-                            cpp_path=self.CPPPATH)
+                ast = parse_file(file, use_cpp=True,
+                        cpp_path=self.CPPPATH, 
+                        cpp_args=[r'-I./fake_libc_include',
+                                  r'-I'+self.input_dir,
+                                  r'-I'+self.input_dir+'/isc/unix/include',
+                                  r'-I'+self.input_dir+'/isc/win32/include',
+                                  r'-I'+self.input_dir+'/isc/include',
+                                  r'-I'+self.input_dir+'/bind9/include',                             
+                                  r'-I'+self.input_dir+'/dns/include',
+                                  r'-I'+self.input_dir+'/irs/include',                             
+                                  r'-I'+self.input_dir+'/isccc/include',                             
+                                  r'-I'+self.input_dir+'/isccfg/include',                             
+                                  r'-I'+self.input_dir+'/lwres/include',                             
+                                  r'-I'+self.input_dir+'/test/include'                        
+                                  ])
             
                 while_visitor.visit(ast)
                 dowhi_visitor.visit(ast)
                 forlo_visitor.visit(ast)
             
-                ast.show()
-                            
+                # ast.show()
+            
                 totalwhiles  = totalwhiles  + while_visitor.count()
                 totaldwhiles = totaldwhiles + dowhi_visitor.count()
                 totalfors    = totalfors    + forlo_visitor.count()
@@ -113,8 +127,10 @@ class Oops(object):
                     )
                 )        
                         
-            except Exception as e:
-                print "Unexpected parsing error ({0}): {1}".format(file,str(e)) 
+            except ParseError as e:
+                print("Unable to parse " + file)
+                #print(e)
+                raise
             
 
         json_data = dict(files=[ r for r in output ], 
@@ -131,4 +147,4 @@ class Oops(object):
     
 
 if __name__ == '__main__':
-    t = Oops()
+    t = Oops(sys.argv[1])
