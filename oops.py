@@ -13,10 +13,11 @@ import subprocess
 sys.path.insert(0, '..')
 
 from pycparser import c_parser, c_ast, parse_file # A Parser for the C language: https://bitbucket.org/eliben/pycparser
+from pycparser.plyparser import ParseError
 
 class oops(object):
-    BIND_DIR = os.path.dirname(os.path.abspath(__file__))
-    
+    # BIND_DIR = os.path.dirname(os.path.abspath(__file__))
+    BIND_DIR = '/home/linzhp/data/bind-9.9.1-P2/lib'
     
     # Portable cpp path for Windows and Linux/Unix
     CPPPATH = '../utils/cpp.exe' if sys.platform == 'win32' else 'cpp'
@@ -87,21 +88,28 @@ class oops(object):
         for file in files:
             try:
                 ast = parse_file(file, use_cpp=True,
-                        cpp_path=self.CPPPATH)
+                        cpp_path=self.CPPPATH, 
+                        cpp_args=[r'-I./fake_libc_include',
+                                  r'-I'+self.BIND_DIR,
+                                  r'-I'+self.BIND_DIR+'/isc/unix/include',
+                                  r'-I'+self.BIND_DIR+'/isc/win32/include',
+                                  r'-I'+self.BIND_DIR+'/isc/include',
+                                  
+                                  ])
             
                 while_visitor.visit(ast)
                 dowhi_visitor.visit(ast)
                 forlo_visitor.visit(ast)
             
-                ast.show()
+                # ast.show()
             
                 totalwhiles  = totalwhiles  + while_visitor.count()
                 totaldwhiles = totaldwhiles + dowhi_visitor.count()
                 totalfors    = totalfors    + forlo_visitor.count();        
                         
-            except:
+            except ParseError as e:
                 print("Unable to parse " + file)
-            
+                print(e)
 
             
             
