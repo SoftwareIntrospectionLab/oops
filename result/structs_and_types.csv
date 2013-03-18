@@ -1,0 +1,1243 @@
+Loop Skeleton,Loop Invariant,exit condition,structs,types,module
+"while(loop_invariant){
+  update
+  if(condition) { update }
+}",acls[i] != NULL,acls[i] == NULL,"cfg_obj_t
+cfg_aclconfctx_t","unsigned int
+int
+NULL",bind9
+"do {
+update
+if(condition) {update} else {update}
+if(condition) {update}
+} while(loop_invariant)",sources[++source].v4 != NULL,sources[++source].v4 == NULL,"cfg_obj_t
+
+","char *buffer
+unsigned int
+int
+NULL",bind9
+"while(loop_invariant){
+        update
+        if(condition){
+                if(condition){ update }
+                update
+        }
+}","(e2 = cfg_list_next(e2)) != NULL
+
+","(e2 = cfg_list_next(e2)) == NULL
+
+","cfg_listelt_t
+cfg_obj_t","char *buffer
+unsigned int
+string
+NULL",bind9
+"do {
+  update
+} while (loop_invariant);","sigtime != 0
+
+","sigtime != 0
+
+",,"char *buffer
+isc_uint64_t",dns
+"do {
+  if(!loop_invariant) exit
+  update
+} while(1)","token.type != isc_tokentype_string
+
+","token.type == isc_tokentype_string
+
+",isc_token_t,"unsigned int
+isc_buffer_t
+NULL
+isc_tokentype_string",dns
+"while(loop_invariant){
+        update
+        if(condition){
+                update
+        }
+}","region.length > 0
+
+","region.length <= 0
+
+",dns_name_t,"int
+isc_region_t
+unsigned int
+isc_boolean_t",dns
+"while(loop_invariant){
+        update
+}","isc_buffer_activelength(source) > 0
+
+","isc_buffer_activelength(source) <= 0
+
+",dns_name_t ,"int
+unsigned char *buffer
+NULL",dns
+"while(loop_invariant){
+        update
+        if(condition){
+                return data 
+        }
+        update
+}
+
+","r1.length != 0 && r2.length != 0
+
+","r1.length == 0 || r2.length == 0
+
+",dns_name_t,"isc_region_t
+int",dns
+"while(loop_invariant){
+        update
+        if(condition) { update }
+}","*e != 0
+
+","*e == 0
+
+",,"char *buffer
+
+",dns
+"while(loop_invariant){
+        update
+        if(condition) return
+        if(condition) {update; continue;} 
+        else if(condition) { update; continue; }
+        else return data
+        
+        if(condition){
+                switch(char){
+                        case _: update
+                        default: update
+                }
+        } 
+        
+        if(condition){ update }
+}","len-- > 0
+
+","len-- <= 0
+
+",,"isc_boolean_t
+unsigned char 
+char *buffer",dns
+"do {
+  update
+  if(!loop_invariant) exit
+  update
+} while(1)","token.type != isc_tokentype_string
+
+","token.type == isc_tokentype_string
+
+","dns_rdatatype_t
+isc_token_t","unsigned char*
+isc_boolean_t
+unsigned int
+isc_lex_t
+isc_tokentype_string",dns
+"do {
+  update
+  if(!loop_invariant) exit
+  update
+  if(condition) {update} else if(condition){update}
+  if(condition) return
+  if(condition) {update}
+  update
+} while(1)","token.type != isc_tokentype_string
+
+","token.type == isc_tokentype_string
+
+","isc_token_t
+dns_rdata_t","unsigned char*
+isc_boolean_t
+unsigned int
+isc_lex_t
+isc_tokentype_string",dns
+"while(loop_invariant){
+        if(condition) {
+                if(condition) update
+                update
+                if(condition) {update}
+                else {update}
+                update
+        }
+        
+}","r.length > 0
+
+","r.length <= 0
+
+",,"isc_region_t (r)
+isc_uint16_t
+char *buffer
+unsigned int",dns
+"while(loop_invariant){
+        if(condition) return
+        update
+        if(condition) return
+        update        
+}
+
+","sregion.length != 0
+
+","sregion.length == 0
+
+",,"isc_region_t
+int
+unsigned int",dns
+"while(loop_invariant){
+        update
+        for(loop_invariant) {
+                update
+                if(condition) {update; goto label;}
+                else if(condition) {update; goto label;}
+        }
+        
+        update
+}","result == ISC_R_SUCCESS
+rdataset != NULL","result != ISC_R_SUCCESS
+rdataset == NULL","dns_message_t 
+dns_section_t
+dns_name_t
+dns_rdataset_t","unsigned int
+int
+unsigned int
+query_result_t
+NULL",export
+"while(loop_invariant){
+        update
+        for(loop_invariant) {
+                update
+                if(condition) {update; goto label;}
+        }
+        
+        update
+}","result == ISC_R_SUCCESS
+rdataset != NULL","result != ISC_R_SUCCESS
+rdataset == NULL","dns_message_t 
+dns_section_t
+dns_name_t
+dns_rdataset_t
+int","unsigned int
+unsigned int
+query_result_t
+NULL",export
+"while(loop_invariant){
+        update
+        for(loop_invariant) {
+                update
+                if(condition) {update; goto label;}
+        }
+        
+        update
+}","result == ISC_R_SUCCESS
+rdataset != NULL","result != ISC_R_SUCCESS
+rdataset == NULL","dns_message_t 
+dns_section_t
+dns_name_t
+dns_rdataset_t","unsigned int
+int
+unsigned int
+query_result_t
+NULL",export
+"while(loop_invariant){
+        update
+        while(loop_invariant){
+         update
+        }
+        update
+}","(pns = ISC_LIST_HEAD(trans->nslist)) != NULL
+(server = ISC_LIST_HEAD(pns->servers)) != NULL","
+(pns = ISC_LIST_HEAD(trans->nslist)) == NULL
+(server = ISC_LIST_HEAD(pns->servers)) == NULL","probe_ns 
+server","int
+NULL
+isc_mem_t ",export
+"while(loop_invariant){
+        switch(char){
+         case_: update; break;
+         default: print; break;
+        }
+}","(ch = getopt(argc, argv, ""c:dhv"")) != -1
+
+","(ch = getopt(argc, argv, ""c:dhv"")) == -1
+
+",,"char
+isc_boolean_t",export
+"while(loop_invariant){
+        switch(char){
+         case_: update; break;
+         default: print; break;
+        }
+}
+
+","(ch = getopt(argc, argv, ""a:es:t:k:K:"")) != -1
+
+","(ch = getopt(argc, argv, ""a:es:t:k:K:"")) == -1
+
+",,"
+NULL
+char
+isc_boolean_t
+char *buffer",export
+"while(loop_invariant){
+        while(loop_invariant){
+                update
+        }
+        update
+}","(pname = ISC_LIST_HEAD(prereqlist)) != NULL
+(rdataset = ISC_LIST_HEAD(pname->list)) != NULL","(pname = ISC_LIST_HEAD(prereqlist)) == NULL
+(rdataset = ISC_LIST_HEAD(pname->list)) == NULL","dns_name_t
+dns_rdataset_t","NULL
+int
+isc_mem_t
+dns_namelist_t",export
+"while (loop_invariant) {
+        update
+}","(buf = ISC_LIST_HEAD(usedbuffers)) != NULL
+
+","(buf = ISC_LIST_HEAD(usedbuffers)) == NULL
+
+",,"isc_bufferlist_t
+isc_buffer_t
+int
+NULL
+[isc_buffer_t]",export
+"while (loop_invariant) {
+        update
+}","cmdline != NULL && *cmdline != 0 && isspace((unsigned char)*cmdline)
+
+","cmdline == NULL || *cmdline == 0 || !isspace((unsigned char)*cmdline)
+
+",,"unsigned char
+char *buffer",export
+"while(loop_invariant){
+        update
+}
+
+","(keyent = ISC_LIST_HEAD(conf->trusted_keylist)) != NULL
+
+","(keyent = ISC_LIST_HEAD(conf->trusted_keylist)) == NULL
+
+",dns_name_t,"irs_dnsconf_dnskey_t
+NULL
+int
+isc_buffer_t 
+isc_mem_t ",irs
+"while(loop_invariant){ 
+        update
+        if(condition) update
+        if(condition) update
+        update 
+}","(resstate = ISC_LIST_HEAD(head->resstates)) != NULL
+
+","(resstate = ISC_LIST_HEAD(head->resstates)) == NULL
+
+","gai_restrans
+gai_resstate ","NULL
+isc_mem_t
+int",irs
+"while(loop_invariant){
+        update
+        if(condition){
+                if(condition) update
+                if(condition) update
+                update
+        }
+        
+        if(condition) update
+        if(condition) update
+        if(condition){
+                if(condition) update
+                else if (condition) update
+        }
+        if(condition){
+                update
+                if(condition) update
+        }
+}","(resstate = ISC_LIST_HEAD(head.resstates)) != NULL
+
+","(resstate = ISC_LIST_HEAD(head.resstates)) == NULL
+
+","gai_statehead 
+gai_resstate
+addrinfo
+gai_restrans","NULL
+int
+isc_mem_t",irs
+"while(loop_invariant){
+        update
+        if(condition){
+                if(condition) update
+                update
+        } else if (condition) {
+                update
+                if(condition) update
+                update
+        }
+}","order != NULL
+
+","order == NULL
+
+",,"NULL
+char *buffer
+int",irs
+"while(loop_invariant){
+        update
+        if(condition) update
+        if(condition) update
+        update
+}","ai != NULL
+
+","ai == NULL
+
+",addrinfo,NULL,irs
+"while(loop_invariant){
+        update
+}","oai != NULL
+
+","oai == NULL
+
+",addrinfo,NULL,irs
+"do {
+        if(loop_invariant) goto label 
+} while(0)","result != 0
+
+",result == 0,,int,irs
+"while(loop_invariant){
+        update
+}","ch != '\n' && ch != EOF
+
+","ch == '\n' || ch == EOF
+
+",__sFILE,int,irs
+"while(loop_invariant){
+        update
+}","ch != '\n' && ch != EOF && isspace((unsigned char)ch)
+
+","ch == '\n' || ch == EOF || !isspace((unsigned char)ch)
+
+",__sFILE,int,irs
+"do {
+        update
+        if(loop_invariant) break
+        else if(condition) return
+        update 
+} while(0)","ch == EOF || isspace((unsigned char)ch)
+
+","ch != EOF && !isspace((unsigned char)ch)
+
+",__sFILE,"int
+char *buffer
+unsigned char
+char",irs
+"while (loop_invariant) {
+        update
+
+        if (condition) update
+        else {
+                update
+                if (loop_invariant) break;
+                update
+                for (loop_invariant) update
+        }
+}","!ctx.seen_end && (ctx.length != 0)
+
+token.type != isc_tokentype_string
+
+i < tr->length","ctx.seen_end || (ctx.length == 0)
+token.type == isc_tokentype_string
+i >= tr->length","isc_token_t
+base32_decode_ctx_t","isc_boolean_t
+int
+unsigned int
+isc_textregion_t
+char *buffer",isc
+"while(loop_invariant){ 
+  update 
+}","source->length != 0
+
+","source->length == 0
+
+",base32_decode_ctx_t,"int
+char *buffer
+isc_buffer_t",isc
+"do {
+        update
+        if(loop_invariant) return 
+} while(0)","result != 0
+
+","result == 0
+
+",,"unsigned int
+
+",isc
+"while(loop_invariant){
+        update
+        if(condition) update
+}","source->length > 2
+
+","source->length <= 2
+
+",,"char *buffer
+unsigned int 
+char
+isc_region_t
+isc_buffer_t",isc
+"while(loop_invariant){
+        update 
+        if(condition) update
+        else update
+        update
+        if(!loop_invariant) break
+        for(loop_invariant){update}        
+}","!ctx.seen_end && (ctx.length != 0)
+
+token.type != isc_tokentype_string
+
+i < tr->length","ctx.seen_end || (ctx.length == 0)
+
+
+token.type == isc_tokentype_string
+
+i >= tr->length","isc_token_t
+base64_decode_ctx_t","int
+isc_buffer_t
+int *buffer
+isc_textregion_t
+isc_lex_t
+isc_tokentype_string",isc
+"while(loop_invariant){
+        if(condition) update
+        else update
+        update
+}","n > 0
+
+","n <= 0
+
+",,"int
+isc_bitstring_t 
+unsigned int ",isc
+"while(loop_invariant){
+        update
+}","buffer != NULL
+
+","buffer == NULL
+
+",,"int
+isc_bufferlist_t 
+isc_buffer_t 
+unsigned int",isc
+"while (loop_invariant) {
+  update
+  if(condition) update
+  else if(condition) update
+}","desired > 0 && result == ISC_R_SUCCESS
+
+","desired <= 0 || result != ISC_R_SUCCESS
+
+",isc_cbsource_t,"isc_entropy_t
+unsigned int
+isc_boolean_t",isc
+"while (remain != 0) {
+                update
+
+                if (condition) {
+                        update
+                        if (condition) {update}
+                        else {update}
+
+                        if (condition) {
+                                if (condition) {goto label;}
+                                else {goto label;}
+                        }
+                } else {
+                        if (condition){ update }
+                        else {update}
+
+                        if (condition){ update }
+                }
+
+                update
+
+                for (loop_invariant) { update }
+                update
+}","remain != 0
+
+i < count","remain == 0
+
+i >= count",,"unsigned int
+unsigned char *buffer
+isc_sha1_t
+isc_uint8_t
+isc_uint32_t
+isc_boolean_t
+isc_entropy_t
+int",isc
+"while (loop_invariant) {
+        switch (type) {
+         case _: break
+         default: return
+        }
+        update
+}","source != NULL
+
+","source == NULL
+
+",isc_entropysource_t,"int
+isc_boolean_t",isc
+"while(loop_invariant){
+        update
+        if(condition) update
+        update
+}","alist != NULL
+
+","alist == NULL
+
+",isccc_sexpr_t,"char *buffer
+int",isccc
+"while(loop_invariant){
+        update
+        if(condition) return
+        update
+}","list != NULL
+
+","list == NULL
+
+",isccc_sexpr_t,"isccc_region_t
+unsigned int",isccc
+"while(loop_invariant){
+        update
+        if(condition) {update; goto label;}
+        update
+        if(condition) {goto label;}
+        if(condition) {update; goto label;}
+        if(condition) {update}        
+        update        
+}","!REGION_EMPTY(*source)
+
+","REGION_EMPTY(*source)
+
+",isccc_sexpr_t,"char *buffer;
+isc_uint32_t
+unsigned int
+isc_boolean_t
+unsigned char *buffer
+isccc_region_t
+NULL",isccc
+"while(loop_invariant){
+        update
+        if(condition) {update; return}
+        if(condition) {update; return}        
+}","!REGION_EMPTY(*source)
+
+","REGION_EMPTY(*source)
+
+",isccc_sexpr_t,"isccc_region_t
+NULL
+unsigned int",isccc
+"while(loop_invariant){
+        if(condition) {return}
+}","(c = *str++) != '\0'
+
+","(c = *str++) == '\0'
+
+",,"char
+char *buffer
+isc_boolean_t
+NULL",isccc
+"while(loop_invariant){
+        if(condition) {return}
+        update
+}","curr != r->rend
+
+","curr == r->rend
+
+",,"isc_boolean_t
+unsigned char *buffer
+isccc_region_t",isccc
+"do{
+        update
+        if(condition){
+                if(condition){
+                        update
+                }
+        }
+        update
+} while(loop_invariant)","sexpr != NULL
+
+","sexpr == NULL
+
+","isccc_sexpr_t
+__sFILE","unsigned int
+unsigned char
+NULL",isccc
+"while(loop_invariant){
+        if(condition) {
+                if(condition) {update}
+                update
+        } 
+        else if(condition) {
+                if(condition) {update}
+                update
+        } 
+}","order != NULL
+
+","order == NULL
+
+",,"char *buffer
+int
+unsigned int",lwres
+"while(loop_invariant){
+        if(condition) {goto label}
+        update
+        if(condition) {return}
+        update
+        label:
+                if(loop_invariant) {break}
+                else {update} 
+}","strlen(word) > 0U
+delim == EOF || delim == '\n'","strlen(word) <= 0U
+delim != EOF && delim != '\n'",__sFILE,"int
+char *buffer
+lwres_conf_t
+NULL",lwres
+"for (loop_invariant) {
+        update
+        if (condition) {update}
+}","element != NULL;
+
+",element == NULL;,"cfg_listelt_t
+cfg_obj_t","unsigned int
+NULL;
+isc_log_t",bind9
+"for (loop_invariant) {
+        update
+        if (condition) {continue;}
+        if (condition) {update}
+        update
+        if (condition) {
+                update
+                if (condition) {
+                        update
+                }
+        }
+}",element != NULL;,element == NULL;,"cfg_listelt_t
+cfg_obj_t
+dns_name_t
+dns_fixedname_t","char *buffer
+unsigned int
+isc_buffer_t 
+isc_uint32_t
+isc_log_t 
+NULL
+int",bind9
+"for (loop_invariant){
+        update
+        if (condition) {
+                update
+        }
+        if (condition) {
+                update
+        }
+}",element != NULL;,element == NULL;,"cfg_listelt_t
+cfg_obj_t
+dns_name_t
+dns_fixedname_t","isc_log_t
+unsigned int
+char *buffer;
+isc_buffer_t
+isc_textregion_t
+dns_secalg_t
+int
+isc_uint8_t",bind9
+"for (loop_invariant){
+        update
+
+        if (condition) {
+                update
+                continue;
+        }
+
+        if (condition) {
+                update
+                continue;
+        }
+
+        for (loop_invariant) {
+                update
+                if (condition) {
+                        update
+                        if (condition) {update}
+                        if (condition) {update}
+                }
+        }
+
+        update
+        if (condition) {
+                update
+                if (condition) {
+                        update
+                        continue;
+                }
+                update
+                if (condition) {update}
+                if (condition) {
+                        update
+                }
+        }
+}","element != NULL;
+acls[i] != NULL","element == NULL;
+acls[i] == NULL","dns_acl_t
+cfg_obj_t
+cfg_aclconfctx_t","unsigned int
+isc_log_t
+isc_mem_t
+[char *buffer]
+NULL
+isc_netaddr_t
+int
+unsigned char *buffer",bind9
+"for (loop_invariant) {
+        update
+
+        if (condition) {update}
+        if (condition) {
+                update
+                if (condition) {update}
+        }
+
+        if (condition) {continue}
+
+        update
+
+        if (condition) {update}
+
+        if (condition) {continue;}
+
+        if (condition) {
+                update
+        }
+
+        if (condition) {update}
+}","acls[i] != NULL
+
+",acls[i] == NULL,"dns_acl_t
+cfg_obj_t
+cfg_aclconfctx_t","unsigned int
+char *buffer 
+isc_log_t
+isc_mem_t
+NULL
+isc_boolean_t
+char *buffer
+int",bind9
+"for (loop_invariant) {
+        update
+        if (condition) {continue;}
+        update
+        if (condition) {
+                update
+        } else if (condition) {
+                update
+        }
+}","i < sizeof(intervals) / sizeof(intervals[0])
+
+","i >= sizeof(intervals) / sizeof(intervals[0])
+
+","cfg_obj_t
+intervaltable","isc_uint32_t
+NULL
+char *name;
+unsigned int",bind9
+"for (loop_invariant)
+{
+        update
+        if (condition) {update}
+}",element != NULL;,element == NULL;,"cfg_listelt_t
+cfg_obj_t",unsigned int,bind9
+"for (loop_invariant) {
+        update
+        if (condition) {
+                update
+                if (condition) {
+                        update
+                }
+        }
+}
+
+","server_contact[i] != NULL
+
+","server_contact[i] == NULL
+
+",cfg_obj_t,"NULL
+[char *buffer]
+char *buffer;
+isc_buffer_t
+unsigned int
+isc_log_t",bind9
+"for (loop_invariant)
+{
+        if (loop_invariant) {continue;}
+        if (condition) {update}
+        break;
+}","i < sizeof(dialups) / sizeof(dialups[0]);
+strcasecmp(dialups[i].name, str) != 0","i >= sizeof(dialups) / sizeof(dialups[0]);
+strcasecmp(dialups[i].name, str) == 0","cfg_obj_t
+optionstable","NULL
+char *buffer
+isc_log_t
+unsigned int
+int",bind9
+"for (loop_invariant) {
+        update
+        if (loop_invariant) {break;}
+}","algorithms[i].name != NULL
+strncasecmp(algorithms[i].name, algorithm, len) == 0 &&
+            (algorithm[len] == '\0' ||
+             (algorithms[i].size != 0 && algorithm[len] == '-'))","
+algorithms[i].name == NULL
+strncasecmp(algorithms[i].name, algorithm, len) != 0 ||
+            (algorithm[len] != '\0' &&
+             !(algorithms[i].size != 0 && algorithm[len] == '-'))",keyalgorithms,"char *buffer
+isc_uint16_t
+size_t",bind9
+"for (loop_invariant) {
+        update
+        if (condition) {update}
+        update
+        if (condition) {update}
+
+        update
+
+        if (condition) {update}
+}",entry != NULL,entry == NULL,"dns_acacheentry_t
+dns_acache_t","NULL
+int",dns
+"for (loop_invariant) {
+        while (loop_invariant) {
+                update
+        }
+}","i < DBBUCKETS
+(dbent = ISC_LIST_HEAD(acache->dbbucket[i])) != NULL","i >= DBBUCKETS
+(dbent = ISC_LIST_HEAD(acache->dbbucket[i])) == NULL","dns_acacheentry_t
+dns_db_t
+dns_dbnode_t
+dns_acache_t
+dbentry","int
+NULL
+ISC_LIST",dns
+for (loop_invariant) {update},i < DEFAULT_ACACHE_ENTRY_LOCK_COUNT,i >= DEFAULT_ACACHE_ENTRY_LOCK_COUNT,dns_acache_t,int,dns
+"for (loop_invariant) {
+        if (loop_invariant) {break;}
+}","dbentry != NULL
+dbentry->db == db","dbentry == NULL
+dbentry->db != db","dns_db_t
+dns_acache_t
+dbentry","int
+NULL",dns
+"for (loop_invariant) {
+        update
+}",rdataset != NULL,rdataset == NULL,"dns_rdataset_t
+dns_acache_t",int,dns
+"for (loop_invariant) {
+        update
+}","i < j->header.index_size
+
+","i >= j->header.index_size
+
+",,"isc_uint32_t
+int
+unsigned char *buffer",
+"for (loop_invariant) {
+        if (loop_invariant) {break;}
+}","i < j->header.index_size;
+! POS_VALID(j->index[i])","i >= j->header.index_size;
+POS_VALID(j->index[i])",,"unsigned int
+dns_journal_t",
+"for (;;) {
+        update
+        if (loop_invariant) {break;}
+
+        update
+        if (condition) {return}
+        update
+}",result != ISC_R_NOSPACE,result == ISC_R_NOSPACE,,"int
+unsigned int
+NULL
+isc_buffer_t
+isc_mem_t",
+"for (loop_invariant) {
+        update
+}",i < DNS_SECTION_MAX,i >= DNS_SECTION_MAX,dns_message_t,"NULL
+unsigned int",
+"for (loop_invariant) {
+        if (condition) {
+                if (condition) {update}
+                return 
+        }
+}",curr != NULL,curr == NULL,"dns_name_t
+dns_rdatatype_t
+dns_rdataset_t
+dns_rdataclass_t","NULL
+int",
+"for (loop_invariant){
+        update
+        if (condition) {
+                if (condition) {update}
+                update
+        }
+        update
+}",result == ISC_R_SUCCESS,"result != ISC_R_SUCCESS
+
+","dns_rdatasetiter_t
+dns_rdataset_t","unsigned int
+unsigned char *buffer",
+"for (loop_invariant) {
+        if (loop_invariant) {break;}
+        for (loop_invariant)
+                if (loop_invariant) {break;}
+        if (condition) {continue;}
+        update
+}","window < 256
+window * 256 > max_type
+octet >= 0
+bm[window * 32 + octet] != 0","window >= 256
+window * 256 <= max_type
+octet < 0
+bm[window * 32 + octet] == 0",,"unsigned int
+unsigned char *buffer
+int ",
+"for (loop_invariant) {
+        update
+}",i < MAX_QUERIES,i >= MAX_QUERIES,"dns_name_t
+dns_fixedname_t
+dns_clientrestrans_t
+query_trans
+
+","int
+[struct query_trans]
+NULL
+isc_boolean_t
+dns_namelist_t",export
+"for (loop_invariant) {
+        if (condition) {
+                update
+        }
+        update
+}",i < nservers,i >= nservers,"in_addr
+isc_sockaddr","int
+char *serveraddr",
+"for (loop_invariant) {
+        update
+        if (condition)
+                update
+        if (condition) {
+                update
+        } else {
+                update
+        }
+}",res != NULL,res == NULL,addrinfo,"NULL
+int
+char *buffer
+size_t",
+"for (loop_invariant) {
+        if (loop_invariant) {break;}
+        update
+        if (loop_invariant) {
+                if (condition){update}
+                break;
+        }
+}","i < FOUND_MAX
+et_order[i] == NULL
+err == 0","i >= FOUND_MAX
+et_order[i] != NULL
+err != 0",addrinfo,"int
+NULL
+char *buffer",irs
+"for (loop_invariant) {
+        update
+        for (loop_invariant)
+                if (condition) {
+                        update
+                }
+}","*s != '\0'
+(dc = *d) != '\0'","*s == '\0'
+(dc = *d) == '\0'",,"char *buffer
+char sc",
+for (loop_invariant) {;},ai_tmp != NULL && ai_tmp->ai_next != NULL,ai_tmp == NULL || ai_tmp->ai_next == NULL,,,
+"for (loop_invariant) {
+        if (condition) {
+                update
+        }
+}",i < RESCONFMAXSEARCH,i >= RESCONFMAXSEARCH,,"irs_resconf_t
+NULL",
+"for (loop_invariant) {
+        update
+        if (loop_invariant) {break;}
+}","i < conf->searchnxt;
+ret != ISC_R_SUCCESS","i >= conf->searchnxt;
+ret == ISC_R_SUCCESS",,"int
+irs_resconf_t",
+"for (;;) {
+        update
+        if (loop_invariant) {break;}
+        if (condition) {continue;}
+        update
+}",c == '\0',c != '\0',,"int
+unsigned int",isc
+"for (loop_invariant) {
+        update
+}
+",len > 3,len <= 3,isc_entropypool_t,"isc_uint32_t
+int",
+"for (loop_invariant) {
+        update
+        if (condition) {update}
+}","i > 1 && heap->compare(elt, heap->array[p])","i <= 1 || !heap->compare(elt, heap->array[p])",,"unsigned int
+isc_heap_t
+NULL
+int",
+"for (;;) {
+        update
+        if (loop_invariant) {break;}
+        if (condition) {continue;}
+        update
+}",c == '\0',c != '\0',hex_decode_ctx_t,"int
+char *buffer",
+"for (;;) {
+        if (condition) {return (0);}
+        update
+        if (condition) {
+                update
+                if (condition)
+                        update
+                else {
+                        update
+                }
+        }
+        for (;;) {
+                if (loop_invariant) {
+                        if (condition) {return (0);}
+                        update
+                } else if (loop_invariant) {
+                        update
+                } else {break;}
+        }
+        if (loop_invariant) {
+                if (condition) {return (0);}
+                update
+        } else {break;}
+}","c != '.'
+isascii(c) && isdigit(c) 
+base == 16 && isascii(c) && isxdigit(c)","c != '.'
+!isascii(c) || !isdigit(c) 
+base != 16 || !isascii(c) || !isxdigit(c)",,"char *cp
+int
+unsigned char
+[isc_uint8_t]
+isc_uint8_t
+unsigned long",
+"for (loop_invariant) {
+        update
+}",i <= n,i > n,,"unsigned char *buffer
+int",
+"for (loop_invariant) {
+        if (condition) {
+                update
+        }
+}",channel != NULL,channel == NULL,isc_logchannel,"isc_log_t
+unsigned int
+char *buffer
+int
+NULL",
+"for (loop_invariant) {
+        update
+        if (condition)
+                {update}
+        if (condition) {
+                update
+                if (condition) {update}
+        }
+        if (condition) {update}
+        if (condition) {update}
+}",i > 0,i <= 0,isc_logchannel ,"unsigned int
+char *buffer
+char",
+"for (loop_invariant) {
+        update
+        if (condition) {
+                while (loop_invariant) {
+                        update
+                }
+                return (result);
+        }
+}","i < count
+i > 0U","i >= count
+i == 0U",,"unsigned int 
+isc_mutex_t
+int",
+"for (loop_invariant) {
+        if (condition) {
+                update
+                continue;
+        }
+        
+        for (loop_invariant) {
+                if (loop_invariant) {break;}
+        }
+        update
+        break;
+}","i*8 < check_bit
+j < 8
+BIT_TEST (r, (0x80 >> j))","i*8 >= check_bit
+j >= 8
+!BIT_TEST (r, (0x80 >> j))",,"unsigned char *buffer
+isc_uint32_t
+int",
+"for (loop_invariant) {
+        update
+        if (condition) {}
+}",elt != NULL;,elt == NULL;,"isccc_sexpr_t
+__sFILE","unsigned int
+NULL
+int",isccc
+"for (loop_invariant) {
+        update
+        if (condition){}
+}",elt != NULL,elt == NULL,"__sFILE
+isccc_sexpr_t","unsigned int
+NULL
+int",
+"for (loop_invariant) {
+        if (condition) {return (ISC_R_NOTFOUND);}
+        if (condition) {return (ISC_R_SUCCESS);}
+}","maps[i] == NULL
+cfg_map_get(maps[i], name, obj) == ISC_R_SUCCESS","maps[i] != NULL
+cfg_map_get(maps[i], name, obj) != ISC_R_SUCCESS",cfg_obj_t,"int
+char *buffer",
+"for (loop_invariant) {
+        if (loop_invariant) {break;}
+        update
+        if (condition) {return (err);}
+}","i < FOUND_MAX
+net_order[i] == NULL","i >= FOUND_MAX
+net_order[i] != NULL",addrinfo,"int
+NULL
+char *buffer",lwres
+"for (loop_invariant) {
+        update
+        for (loop_invariant)
+                if (condition) {
+                        update
+                        return (string);
+                }
+}","*s != '\0'
+(dc = *d) != '\0'","*s == '\0'
+(dc = *d) == '\0'",,"char *buffer
+char ",
+"for (loop_invariant) {
+    update
+}","he->h_addr_list[i] != NULL
+
+",he->h_addr_list[i] == NULL,hostent,int,
+"for (loop_invariant) {
+   update
+}",he->h_aliases[i] != NULL,he->h_aliases[i] == NULL,hostent,"int
+char *buffer",
