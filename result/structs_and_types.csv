@@ -1,4 +1,4 @@
-Loop Skeleton,Loop Invariant,exit condition,structs,types,module
+loop,loopinv,exitcond,structs,types,module
 "while(loop_invariant){
   update
   if(condition) { update }
@@ -37,7 +37,7 @@ NULL",bind9
 
 ","sigtime != 0
 
-",,"char *buffer
+",none,"char *buffer
 isc_uint64_t",dns
 "do {
   if(!loop_invariant) exit
@@ -75,7 +75,7 @@ NULL",dns
 "while(loop_invariant){
         update
         if(condition){
-                return data 
+                return data
         }
         update
 }
@@ -93,30 +93,30 @@ int",dns
 
 ","*e == 0
 
-",,"char *buffer
+",none,"char *buffer
 
 ",dns
 "while(loop_invariant){
         update
         if(condition) return
-        if(condition) {update; continue;} 
+        if(condition) {update; continue;}
         else if(condition) { update; continue; }
         else return data
-        
+
         if(condition){
                 switch(char){
                         case _: update
                         default: update
                 }
-        } 
-        
+        }
+
         if(condition){ update }
 }","len-- > 0
 
 ","len-- <= 0
 
-",,"isc_boolean_t
-unsigned char 
+",none,"isc_boolean_t
+unsigned char
 char *buffer",dns
 "do {
   update
@@ -158,12 +158,12 @@ isc_tokentype_string",dns
                 else {update}
                 update
         }
-        
+
 }","r.length > 0
 
 ","r.length <= 0
 
-",,"isc_region_t (r)
+",none,"isc_region_t (r)
 isc_uint16_t
 char *buffer
 unsigned int",dns
@@ -171,14 +171,14 @@ unsigned int",dns
         if(condition) return
         update
         if(condition) return
-        update        
+        update
 }
 
 ","sregion.length != 0
 
 ","sregion.length == 0
 
-",,"isc_region_t
+",none,"isc_region_t
 int
 unsigned int",dns
 "while(loop_invariant){
@@ -188,11 +188,11 @@ unsigned int",dns
                 if(condition) {update; goto label;}
                 else if(condition) {update; goto label;}
         }
-        
+
         update
 }","result == ISC_R_SUCCESS
 rdataset != NULL","result != ISC_R_SUCCESS
-rdataset == NULL","dns_message_t 
+rdataset == NULL","dns_message_t
 dns_section_t
 dns_name_t
 dns_rdataset_t","unsigned int
@@ -206,11 +206,11 @@ NULL",export
                 update
                 if(condition) {update; goto label;}
         }
-        
+
         update
 }","result == ISC_R_SUCCESS
 rdataset != NULL","result != ISC_R_SUCCESS
-rdataset == NULL","dns_message_t 
+rdataset == NULL","dns_message_t
 dns_section_t
 dns_name_t
 dns_rdataset_t
@@ -224,11 +224,11 @@ NULL",export
                 update
                 if(condition) {update; goto label;}
         }
-        
+
         update
 }","result == ISC_R_SUCCESS
 rdataset != NULL","result != ISC_R_SUCCESS
-rdataset == NULL","dns_message_t 
+rdataset == NULL","dns_message_t
 dns_section_t
 dns_name_t
 dns_rdataset_t","unsigned int
@@ -245,7 +245,7 @@ NULL",export
 }","(pns = ISC_LIST_HEAD(trans->nslist)) != NULL
 (server = ISC_LIST_HEAD(pns->servers)) != NULL","
 (pns = ISC_LIST_HEAD(trans->nslist)) == NULL
-(server = ISC_LIST_HEAD(pns->servers)) == NULL","probe_ns 
+(server = ISC_LIST_HEAD(pns->servers)) == NULL","probe_ns
 server","int
 NULL
 isc_mem_t ",export
@@ -258,7 +258,8 @@ isc_mem_t ",export
 
 ","(ch = getopt(argc, argv, ""c:dhv"")) == -1
 
-",,"char
+","
+none","char
 isc_boolean_t",export
 "while(loop_invariant){
         switch(char){
@@ -271,7 +272,7 @@ isc_boolean_t",export
 
 ","(ch = getopt(argc, argv, ""a:es:t:k:K:"")) == -1
 
-",,"
+",none,"
 NULL
 char
 isc_boolean_t
@@ -294,7 +295,7 @@ dns_namelist_t",export
 
 ","(buf = ISC_LIST_HEAD(usedbuffers)) == NULL
 
-",,"isc_bufferlist_t
+",none,"isc_bufferlist_t
 isc_buffer_t
 int
 NULL
@@ -305,7 +306,7 @@ NULL
 
 ","cmdline == NULL || *cmdline == 0 || !isspace((unsigned char)*cmdline)
 
-",,"unsigned char
+",none,"unsigned char
 char *buffer",export
 "while(loop_invariant){
         update
@@ -318,13 +319,13 @@ char *buffer",export
 ",dns_name_t,"irs_dnsconf_dnskey_t
 NULL
 int
-isc_buffer_t 
+isc_buffer_t
 isc_mem_t ",irs
-"while(loop_invariant){ 
+"while(loop_invariant){
         update
         if(condition) update
         if(condition) update
-        update 
+        update
 }","(resstate = ISC_LIST_HEAD(head->resstates)) != NULL
 
 ","(resstate = ISC_LIST_HEAD(head->resstates)) == NULL
@@ -340,7 +341,7 @@ int",irs
                 if(condition) update
                 update
         }
-        
+
         if(condition) update
         if(condition) update
         if(condition){
@@ -355,7 +356,7 @@ int",irs
 
 ","(resstate = ISC_LIST_HEAD(head.resstates)) == NULL
 
-","gai_statehead 
+","gai_statehead
 gai_resstate
 addrinfo
 gai_restrans","NULL
@@ -375,7 +376,7 @@ isc_mem_t",irs
 
 ","order == NULL
 
-",,"NULL
+",none,"NULL
 char *buffer
 int",irs
 "while(loop_invariant){
@@ -396,10 +397,10 @@ int",irs
 
 ",addrinfo,NULL,irs
 "do {
-        if(loop_invariant) goto label 
+        if(loop_invariant) goto label
 } while(0)","result != 0
 
-",result == 0,,int,irs
+",result == 0,none,int,irs
 "while(loop_invariant){
         update
 }","ch != '\n' && ch != EOF
@@ -418,7 +419,7 @@ int",irs
         update
         if(loop_invariant) break
         else if(condition) return
-        update 
+        update
 } while(0)","ch == EOF || isspace((unsigned char)ch)
 
 ","ch != EOF && !isspace((unsigned char)ch)
@@ -449,8 +450,8 @@ int
 unsigned int
 isc_textregion_t
 char *buffer",isc
-"while(loop_invariant){ 
-  update 
+"while(loop_invariant){
+  update
 }","source->length != 0
 
 ","source->length == 0
@@ -460,12 +461,12 @@ char *buffer
 isc_buffer_t",isc
 "do {
         update
-        if(loop_invariant) return 
+        if(loop_invariant) return
 } while(0)","result != 0
 
 ","result == 0
 
-",,"unsigned int
+",none,"unsigned int
 
 ",isc
 "while(loop_invariant){
@@ -475,18 +476,18 @@ isc_buffer_t",isc
 
 ","source->length <= 2
 
-",,"char *buffer
-unsigned int 
+",none,"char *buffer
+unsigned int
 char
 isc_region_t
 isc_buffer_t",isc
 "while(loop_invariant){
-        update 
+        update
         if(condition) update
         else update
         update
         if(!loop_invariant) break
-        for(loop_invariant){update}        
+        for(loop_invariant){update}
 }","!ctx.seen_end && (ctx.length != 0)
 
 token.type != isc_tokentype_string
@@ -511,8 +512,8 @@ isc_tokentype_string",isc
 
 ","n <= 0
 
-",,"int
-isc_bitstring_t 
+",none,"int
+isc_bitstring_t
 unsigned int ",isc
 "while(loop_invariant){
         update
@@ -520,9 +521,9 @@ unsigned int ",isc
 
 ","buffer == NULL
 
-",,"int
-isc_bufferlist_t 
-isc_buffer_t 
+",none,"int
+isc_bufferlist_t
+isc_buffer_t
 unsigned int",isc
 "while (loop_invariant) {
   update
@@ -562,7 +563,7 @@ isc_boolean_t",isc
 
 i < count","remain == 0
 
-i >= count",,"unsigned int
+i >= count",none,"unsigned int
 unsigned char *buffer
 isc_sha1_t
 isc_uint8_t
@@ -608,8 +609,8 @@ unsigned int",isccc
         update
         if(condition) {goto label;}
         if(condition) {update; goto label;}
-        if(condition) {update}        
-        update        
+        if(condition) {update}
+        update
 }","!REGION_EMPTY(*source)
 
 ","REGION_EMPTY(*source)
@@ -624,7 +625,7 @@ NULL",isccc
 "while(loop_invariant){
         update
         if(condition) {update; return}
-        if(condition) {update; return}        
+        if(condition) {update; return}
 }","!REGION_EMPTY(*source)
 
 ","REGION_EMPTY(*source)
@@ -638,7 +639,7 @@ unsigned int",isccc
 
 ","(c = *str++) == '\0'
 
-",,"char
+",none,"char
 char *buffer
 isc_boolean_t
 NULL",isccc
@@ -649,7 +650,7 @@ NULL",isccc
 
 ","curr == r->rend
 
-",,"isc_boolean_t
+",none,"isc_boolean_t
 unsigned char *buffer
 isccc_region_t",isccc
 "do{
@@ -672,16 +673,16 @@ NULL",isccc
         if(condition) {
                 if(condition) {update}
                 update
-        } 
+        }
         else if(condition) {
                 if(condition) {update}
                 update
-        } 
+        }
 }","order != NULL
 
 ","order == NULL
 
-",,"char *buffer
+",none,"char *buffer
 int
 unsigned int",lwres
 "while(loop_invariant){
@@ -691,7 +692,7 @@ unsigned int",lwres
         update
         label:
                 if(loop_invariant) {break}
-                else {update} 
+                else {update}
 }","strlen(word) > 0U
 delim == EOF || delim == '\n'","strlen(word) <= 0U
 delim != EOF && delim != '\n'",__sFILE,"int
@@ -723,9 +724,9 @@ cfg_obj_t
 dns_name_t
 dns_fixedname_t","char *buffer
 unsigned int
-isc_buffer_t 
+isc_buffer_t
 isc_uint32_t
-isc_log_t 
+isc_log_t
 NULL
 int",bind9
 "for (loop_invariant){
@@ -821,7 +822,7 @@ unsigned char *buffer",bind9
 ",acls[i] == NULL,"dns_acl_t
 cfg_obj_t
 cfg_aclconfctx_t","unsigned int
-char *buffer 
+char *buffer
 isc_log_t
 isc_mem_t
 NULL
@@ -942,15 +943,15 @@ dns_acache_t",int,dns
 
 ","i >= j->header.index_size
 
-",,"isc_uint32_t
+",none,"isc_uint32_t
 int
-unsigned char *buffer",
+unsigned char *buffer",dns
 "for (loop_invariant) {
         if (loop_invariant) {break;}
 }","i < j->header.index_size;
 ! POS_VALID(j->index[i])","i >= j->header.index_size;
-POS_VALID(j->index[i])",,"unsigned int
-dns_journal_t",
+POS_VALID(j->index[i])",none,"unsigned int
+dns_journal_t",dns
 "for (;;) {
         update
         if (loop_invariant) {break;}
@@ -958,25 +959,25 @@ dns_journal_t",
         update
         if (condition) {return}
         update
-}",result != ISC_R_NOSPACE,result == ISC_R_NOSPACE,,"int
+}",result != ISC_R_NOSPACE,result == ISC_R_NOSPACE,none,"int
 unsigned int
 NULL
 isc_buffer_t
-isc_mem_t",
+isc_mem_t",dns
 "for (loop_invariant) {
         update
 }",i < DNS_SECTION_MAX,i >= DNS_SECTION_MAX,dns_message_t,"NULL
-unsigned int",
+unsigned int",dns
 "for (loop_invariant) {
         if (condition) {
                 if (condition) {update}
-                return 
+                return
         }
 }",curr != NULL,curr == NULL,"dns_name_t
 dns_rdatatype_t
 dns_rdataset_t
 dns_rdataclass_t","NULL
-int",
+int",dns
 "for (loop_invariant){
         update
         if (condition) {
@@ -988,7 +989,7 @@ int",
 
 ","dns_rdatasetiter_t
 dns_rdataset_t","unsigned int
-unsigned char *buffer",
+unsigned char *buffer",dns
 "for (loop_invariant) {
         if (loop_invariant) {break;}
         for (loop_invariant)
@@ -1001,9 +1002,9 @@ octet >= 0
 bm[window * 32 + octet] != 0","window >= 256
 window * 256 <= max_type
 octet < 0
-bm[window * 32 + octet] == 0",,"unsigned int
+bm[window * 32 + octet] == 0",none,"unsigned int
 unsigned char *buffer
-int ",
+int ",dns
 "for (loop_invariant) {
         update
 }",i < MAX_QUERIES,i >= MAX_QUERIES,"dns_name_t
@@ -1023,7 +1024,7 @@ dns_namelist_t",export
         update
 }",i < nservers,i >= nservers,"in_addr
 isc_sockaddr","int
-char *serveraddr",
+char *serveraddr",export
 "for (loop_invariant) {
         update
         if (condition)
@@ -1036,7 +1037,7 @@ char *serveraddr",
 }",res != NULL,res == NULL,addrinfo,"NULL
 int
 char *buffer
-size_t",
+size_t",export
 "for (loop_invariant) {
         if (loop_invariant) {break;}
         update
@@ -1059,48 +1060,48 @@ char *buffer",irs
                 }
 }","*s != '\0'
 (dc = *d) != '\0'","*s == '\0'
-(dc = *d) == '\0'",,"char *buffer
-char sc",
-for (loop_invariant) {;},ai_tmp != NULL && ai_tmp->ai_next != NULL,ai_tmp == NULL || ai_tmp->ai_next == NULL,,,
+(dc = *d) == '\0'",none,"char *buffer
+char sc",irs
+for (loop_invariant) {;},ai_tmp != NULL && ai_tmp->ai_next != NULL,ai_tmp == NULL || ai_tmp->ai_next == NULL,none,none,irs
 "for (loop_invariant) {
         if (condition) {
                 update
         }
-}",i < RESCONFMAXSEARCH,i >= RESCONFMAXSEARCH,,"irs_resconf_t
-NULL",
+}",i < RESCONFMAXSEARCH,i >= RESCONFMAXSEARCH,none,"irs_resconf_t
+NULL",irs
 "for (loop_invariant) {
         update
         if (loop_invariant) {break;}
 }","i < conf->searchnxt;
 ret != ISC_R_SUCCESS","i >= conf->searchnxt;
-ret == ISC_R_SUCCESS",,"int
-irs_resconf_t",
+ret == ISC_R_SUCCESS",none,"int
+irs_resconf_t",irs
 "for (;;) {
         update
         if (loop_invariant) {break;}
         if (condition) {continue;}
         update
-}",c == '\0',c != '\0',,"int
+}",c == '\0',c != '\0',none,"int
 unsigned int",isc
 "for (loop_invariant) {
         update
 }
 ",len > 3,len <= 3,isc_entropypool_t,"isc_uint32_t
-int",
+int",isc
 "for (loop_invariant) {
         update
         if (condition) {update}
-}","i > 1 && heap->compare(elt, heap->array[p])","i <= 1 || !heap->compare(elt, heap->array[p])",,"unsigned int
+}","i > 1 && heap->compare(elt, heap->array[p])","i <= 1 || !heap->compare(elt, heap->array[p])",none,"unsigned int
 isc_heap_t
 NULL
-int",
+int",isc
 "for (;;) {
         update
         if (loop_invariant) {break;}
         if (condition) {continue;}
         update
 }",c == '\0',c != '\0',hex_decode_ctx_t,"int
-char *buffer",
+char *buffer",isc
 "for (;;) {
         if (condition) {return (0);}
         update
@@ -1125,19 +1126,19 @@ char *buffer",
                 update
         } else {break;}
 }","c != '.'
-isascii(c) && isdigit(c) 
+isascii(c) && isdigit(c)
 base == 16 && isascii(c) && isxdigit(c)","c != '.'
-!isascii(c) || !isdigit(c) 
-base != 16 || !isascii(c) || !isxdigit(c)",,"char *cp
+!isascii(c) || !isdigit(c)
+base != 16 || !isascii(c) || !isxdigit(c)",none,"char *cp
 int
 unsigned char
 [isc_uint8_t]
 isc_uint8_t
-unsigned long",
+unsigned long",isc
 "for (loop_invariant) {
         update
-}",i <= n,i > n,,"unsigned char *buffer
-int",
+}",i <= n,i > n,none,"unsigned char *buffer
+int",isc
 "for (loop_invariant) {
         if (condition) {
                 update
@@ -1146,7 +1147,7 @@ int",
 unsigned int
 char *buffer
 int
-NULL",
+NULL",isc
 "for (loop_invariant) {
         update
         if (condition)
@@ -1159,7 +1160,7 @@ NULL",
         if (condition) {update}
 }",i > 0,i <= 0,isc_logchannel ,"unsigned int
 char *buffer
-char",
+char",isc
 "for (loop_invariant) {
         update
         if (condition) {
@@ -1170,15 +1171,15 @@ char",
         }
 }","i < count
 i > 0U","i >= count
-i == 0U",,"unsigned int 
+i == 0U",none,"unsigned int
 isc_mutex_t
-int",
+int",isc
 "for (loop_invariant) {
         if (condition) {
                 update
                 continue;
         }
-        
+
         for (loop_invariant) {
                 if (loop_invariant) {break;}
         }
@@ -1188,9 +1189,9 @@ int",
 j < 8
 BIT_TEST (r, (0x80 >> j))","i*8 >= check_bit
 j >= 8
-!BIT_TEST (r, (0x80 >> j))",,"unsigned char *buffer
+!BIT_TEST (r, (0x80 >> j))",none,"unsigned char *buffer
 isc_uint32_t
-int",
+int",isc
 "for (loop_invariant) {
         update
         if (condition) {}
@@ -1204,14 +1205,14 @@ int",isccc
 }",elt != NULL,elt == NULL,"__sFILE
 isccc_sexpr_t","unsigned int
 NULL
-int",
+int",isccc
 "for (loop_invariant) {
         if (condition) {return (ISC_R_NOTFOUND);}
         if (condition) {return (ISC_R_SUCCESS);}
 }","maps[i] == NULL
 cfg_map_get(maps[i], name, obj) == ISC_R_SUCCESS","maps[i] != NULL
 cfg_map_get(maps[i], name, obj) != ISC_R_SUCCESS",cfg_obj_t,"int
-char *buffer",
+char *buffer",isccc
 "for (loop_invariant) {
         if (loop_invariant) {break;}
         update
@@ -1230,14 +1231,14 @@ char *buffer",lwres
                 }
 }","*s != '\0'
 (dc = *d) != '\0'","*s == '\0'
-(dc = *d) == '\0'",,"char *buffer
-char ",
+(dc = *d) == '\0'",none,"char *buffer
+char ",lwres
 "for (loop_invariant) {
     update
 }","he->h_addr_list[i] != NULL
 
-",he->h_addr_list[i] == NULL,hostent,int,
+",he->h_addr_list[i] == NULL,hostent,int,lwres
 "for (loop_invariant) {
    update
 }",he->h_aliases[i] != NULL,he->h_aliases[i] == NULL,hostent,"int
-char *buffer",
+char *buffer",lwres
