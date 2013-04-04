@@ -362,8 +362,6 @@ module Clusters
     puts "Dimensionality: #{clusters.size}"
     puts '-----------------------------'
 
-    measurer = Distances.new
-
     clusters.each_index do |dim|
 
       puts
