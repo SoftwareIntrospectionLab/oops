@@ -337,6 +337,22 @@ module Clusters
     overview(data, clusters, 'Single Link Clustering')
   end
 
+  def self.min_distance(clusters)
+    d   = Distances.new
+    max = 0.0
+
+    clusters.each do |cluster|
+      clusters.each do |cluster_prime|
+        val = d.calculate(cluster, cluster_prime)
+        if val > max
+          max = val
+        end
+      end
+    end
+
+    max
+
+  end
 
   def self.overview(data, clusters, msg)
     indexes  = {}
@@ -346,9 +362,14 @@ module Clusters
     puts "Dimensionality: #{clusters.size}"
     puts '-----------------------------'
 
+    measurer = Distances.new
+
     clusters.each_index do |dim|
 
-      puts "#{dim + 1} cluster of size #{clusters[dim].size} "
+      puts
+      puts "Cluster #{dim + 1} of size #{clusters[dim].size} "
+      puts "Cluster's distance between its elements is #{min_distance(clusters[dim])} "
+
       clusters[dim].each do |cluster|
         print cluster
         print '@('
