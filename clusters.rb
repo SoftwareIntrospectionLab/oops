@@ -4,7 +4,9 @@ require 'csv'
 
 # todo: document
 module Clusters
-  VERSION = '0.0.1'
+  VERSION     = '0.0.1'
+  EPS         = 1.7
+  MIN_POINTS  = 2
 
   # Precondition checking
   class Preconditions
@@ -103,17 +105,50 @@ module Clusters
   end
 
   # Single Link Clustering
-  class HierarchicalClustering
+  class SingleLink
     INFINITY = +1.0/0.0
 
-    # read in data
-    def initialize(data)
-      @distance = Array.new(data.size) { Array.new(data.size) }
-      @dist_min = Array.new(data.size)
-      @dist_ops = Distances.new
-      @data     = data
-    end
+    # m: measurer
+    # k: k clusters
+    # data: an array of feature vectors
+    def cluster(s, k, data)
 
+      distance = EPS
+
+      while true
+        # loop with increasing distance until
+        # cluster size is correct
+        distance    *= 1.1 # TODO: this may need tuning/parameterization
+        clusters    = []
+        all_vectors = data
+
+        until all_vectors.empty?
+          # build clusters at this distance
+          p = all_vectors[0]
+          others = all_vectors[1..data.length - 1]
+
+          close = []
+          far = []
+
+          others.to_a.each do |i|
+            #puts s.calculate(p, i)
+            if p != i && s.calculate(p, i) < distance
+              close << i unless i.nil?
+            else
+              far << i unless i.nil?
+            end
+          end
+
+          close << p
+          clusters << close
+          all_vectors = far
+        end
+
+        if clusters.size <= k
+         return clusters
+        end
+      end
+    end
 
 
   end
@@ -196,7 +231,7 @@ module Clusters
     # 4. create a document for presentation
   end
 
-  def self.of(data, eps = 1.7, min_pts = 2)
+  def self.of(data, eps = EPS, min_pts = MIN_POINTS)
     cluster_maker = DensityBasedScan.new(eps, min_pts)
     cluster_maker.cluster(data)
   end
@@ -282,7 +317,7 @@ module Clusters
     print "\n"
   end
 
-  def self.from(path)
+  def self.dbscan(path)
     # F = [ #updates, #inner_whiles,
     #       #inner_fors, #inner_dowhiles,
     #       #conditionals, #structs,
@@ -291,16 +326,23 @@ module Clusters
     data = generate_features(path)
     echo(data)
     clusters = of(prune(data))
-    overview(data, clusters)
+    overview(data, clusters, 'Using Density based Scan Clustering')
+  end
+
+  def self.single_link(path, k)
+    data        = generate_features(path)
+    single_link = SingleLink.new
+    s           = Distances.new
+    clusters    = single_link.cluster(s, k, prune(data))
+    overview(data, clusters, 'Single Link Clustering')
   end
 
 
-
-  def self.overview(data, clusters)
+  def self.overview(data, clusters, msg)
     indexes  = {}
     data.each_with_index { |key, index| indexes[key] = index }
 
-    puts 'All clusters'
+    puts "All clusters (using #{msg})"
     puts "Dimensionality: #{clusters.size}"
     puts '-----------------------------'
 
@@ -315,10 +357,12 @@ module Clusters
         print "\n"
       end
     end
+    print "\n"
   end
 
 end
 
 # Build clusters from collected data in csv file
-Clusters.from('result/structs_and_types.csv')
+Clusters.dbscan('structs_and_types.csv')
+Clusters.single_link('structs_and_types.csv', 4)
 
